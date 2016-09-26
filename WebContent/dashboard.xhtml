@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Google Chart - JSF 2</title>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {
+'packages' : [ 'corechart' ]
+});
+ 
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawChart);
+ 
+// Callback that creates and populates a data table,
+function drawChart() {
+
+// Gráfico 1==========================================================
+var data = google.visualization.arrayToDataTable([
+	[ 'Curso', 'Media' ],
+	#{pieChartMBean.pieChartData}
+]);
+ 
+var options = {
+	'title' : 'INDICE DE APROVEITAMENTO CONSIDERANDO A MÉDIA GERAL INDIVIDUAL DE UM ALUNO POR CURSO',
+	is3D : true,
+	//pieSliceText : 'label',
+	tooltip : {
+	showColorCode : true
+	},
+	'width' : 900,
+	'height' : 500
+};
+ 
+var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	chart.draw(data, options);	
+	
+// Gráfico 2================================================================
+var data = google.visualization.arrayToDataTable([
+	[ 'Curso', 'Media' ],
+		#{pieChartMBean.pieChartData2}
+]);
+		
+var options = {
+	'title' : 'INDICE DE APROVEITAMENTO CONSIDERANDO A MÉDIA GERAL DE TODOS OS ALUNOS EM DETERMINADO CURSO',
+	is3D : true,
+	//pieSliceText : 'label',
+	tooltip : {
+	showColorCode : true
+	},
+	'width' : 900,
+	'height' : 500
+};
+	 
+var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
+	chart.draw(data, options);	
+
+}
+</script>
+</h:head>
+<h:body>
+	<div style="width: 600px;">
+		<div id="chart_div"></div>
+	</div>
+	<div style="width: 600px;">
+		<div id="chart_div2"></div>
+	</div>
+</h:body>
+</html>
