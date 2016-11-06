@@ -1,8 +1,8 @@
 package br.com.dashboard.model;
 
 public class KeyValue {
-	String key;
-	String value;
+	private String key;
+	private String value;
 
 	public KeyValue(String key, String value) {
 		super();
